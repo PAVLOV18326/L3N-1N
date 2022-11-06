@@ -7,36 +7,46 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
-numer = 0
-
-def wiecej():
-    global numer
-    numer += 1
-
-def mniej():
-    global numer
-    numer -= 1
-
-if numer == -1:
-    numer = 359
-
-if numer == 360:
-    numer = 0
-
-
-
 
 class Rotot(BoxLayout):
     def __init__(self, **args):
         super(Rotot, self).__init__(**args)
-        minus = Button(text="po")
-        minus.bind(on_press=mniej)
+
+        minus = Button(text="lewo")
+        minus.bind(on_press=self.mniej)
+        self.numer = 0
         self.add_widget(minus)
-        label = Label(text=str(numer))
-        self.add_widget(label)
-        plus = Button(text="pis")
-        plus.bind(on_press=wiecej)
+        self.label = Label(text=str(self.numer))
+        self.add_widget(self.label)
+        plus = Button(text="prawo")
+        plus.bind(on_press=self.wiecej)
         self.add_widget(plus)
+
+
+
+    def wiecej(self, x):
+        self.numer += 1
+
+        if self.numer == -1:
+            self.numer = 359
+
+        if self.numer == 360:
+            self.numer = 0
+
+        self.label.text = str(self.numer)
+
+    def mniej(self, x):
+        self.numer -= 1
+
+        if self.numer == -1:
+            self.numer = 359
+
+        if self.numer == 360:
+            self.numer = 0
+
+        self.label.text = str(self.numer)
+
+
 
 
 
