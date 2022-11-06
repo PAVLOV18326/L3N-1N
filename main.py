@@ -9,13 +9,13 @@ from kivy.uix.button import Button
 
 numer = 0
 
-def mniej():
-    global numer
-    numer -= 1
-
 def wiecej():
     global numer
     numer += 1
+
+def mniej():
+    global numer
+    numer -= 1
 
 if numer == -1:
     numer = 359
@@ -29,8 +29,14 @@ if numer == 360:
 class Rotot(BoxLayout):
     def __init__(self, **args):
         super(Rotot, self).__init__(**args)
+        minus = Button(text="po")
+        minus.bind(on_press=mniej)
+        self.add_widget(minus)
         label = Label(text=str(numer))
         self.add_widget(label)
+        plus = Button(text="pis")
+        plus.bind(on_press=wiecej)
+        self.add_widget(plus)
 
 
 
@@ -43,5 +49,3 @@ class MyApp(App):
 if __name__ == '__main__':
     MyApp().run()
 
-if __name__ == '__main__':
-    MyApp().run()
